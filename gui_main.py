@@ -102,8 +102,8 @@ class New_Toplevel_1:
         top.title("PlotIt")
 
         self.theme = 'light'
-        self.line_style = '-'
         self.file_path = ''
+        self.line_style = '-'
         root.configure(background=_lightwindowbackground)
 
         self.Canvas1 = Canvas(top)
@@ -187,16 +187,30 @@ class New_Toplevel_1:
         self.current_color = StringVar(top)
         self.current_color.set('Red')
         self.colors = {'Red', 'Blue', 'Cyan', 'Black', 'Green'}
-        self.dropdown_menu = OptionMenu(top, self.current_color,
+        self.dropdown_menu_color = OptionMenu(top, self.current_color,
                                         *self.colors, command=self.Dropdown_Changed)
-        self.dropdown_menu.pack(side='top', anchor='w')
-        self.dropdown_menu.place(relx=0.78, rely=0.40, height=18, width=100)
-        self.dropdown_menu.configure(activebackground=_activebgcolordark)
-        self.dropdown_menu.configure(background=_bgcolorlight)
-        self.dropdown_menu.configure(fg=_fgcolorlight)
-        self.dropdown_menu['menu'].configure(activebackground=_activebgcolordark)
-        self.dropdown_menu['menu'].configure(background=_bgcolorlight)
-        self.dropdown_menu['menu'].configure(fg=_fgcolorlight)
+        self.dropdown_menu_color.pack(side='top', anchor='w')
+        self.dropdown_menu_color.place(relx=0.78, rely=0.40, height=18, width=100)
+        self.dropdown_menu_color.configure(activebackground=_activebgcolordark)
+        self.dropdown_menu_color.configure(background=_bgcolorlight)
+        self.dropdown_menu_color.configure(fg=_fgcolorlight)
+        self.dropdown_menu_color['menu'].configure(activebackground=_activebgcolordark)
+        self.dropdown_menu_color['menu'].configure(background=_bgcolorlight)
+        self.dropdown_menu_color['menu'].configure(fg=_fgcolorlight)
+
+        self.current_line_style = StringVar(top)
+        self.current_line_style.set('-')
+        self.line_styles = {'-', '--', '-.', ':'}
+        self.dropdown_menu_line_style = OptionMenu(top, self.current_line_style,
+                                        *self.line_styles, command=self.dropdown_changed_line_style)
+        self.dropdown_menu_line_style.pack(side='top', anchor='w')
+        self.dropdown_menu_line_style.place(relx=0.78, rely=0.60, height=18, width=100)
+        self.dropdown_menu_line_style.configure(activebackground=_activebgcolordark)
+        self.dropdown_menu_line_style.configure(background=_bgcolorlight)
+        self.dropdown_menu_line_style.configure(fg=_fgcolorlight)
+        self.dropdown_menu_line_style['menu'].configure(activebackground=_activebgcolordark)
+        self.dropdown_menu_line_style['menu'].configure(background=_bgcolorlight)
+        self.dropdown_menu_line_style['menu'].configure(fg=_fgcolorlight)
 
         self.color_input = Entry(top)
         self.color_input.place(relx=0.78, rely=0.47,
@@ -245,6 +259,16 @@ class New_Toplevel_1:
         self.color_input.delete(0, 100)
         self.color_input.insert(0, color)
 
+    def dropdown_changed_line_style(self, current_line_style):
+        if current_line_style == '-':
+            self.line_style = '-'
+        elif current_line_style == '--':
+            self.line_style = '--'
+        elif current_line_style == '-.':
+            self.line_style = '-.'
+        elif current_line_style == ':':
+            self.line_style = ':'
+
     def changeTheme(self):
         if self.bt_themeswitch['text'] == "Light Theme":
             self.bt_themeswitch.configure(text="Dark Theme")
@@ -257,7 +281,7 @@ class New_Toplevel_1:
             self.x_upper.configure(background=_bgcolorlight)
             self.x_upper.configure(fg=_fgcolorlight)
             self.bt_plot.configure(activebackground=_activebgcolordark)
-            self.dropdown_menu.configure(activebackground=_activebgcolordark)
+            self.dropdown_menu_color.configure(activebackground=_activebgcolordark)
             self.color_input.configure(background=_bgcolorlight)
             self.color_input.configure(fg=_fgcolorlight)
             self.bt_go.configure(activebackground=_activebgcolordark)
@@ -276,11 +300,11 @@ class New_Toplevel_1:
             self.bt_plot.configure(fg=_fgcolorlight)
             self.bt_themeswitch.configure(background=_bgcolorlight)
             self.bt_themeswitch.configure(fg=_fgcolorlight)
-            self.dropdown_menu.configure(background=_bgcolorlight)
-            self.dropdown_menu.configure(fg=_fgcolorlight)
-            self.dropdown_menu['menu'].configure(fg=_fgcolorlight)
-            self.dropdown_menu['menu'].configure(background=_bgcolorlight)
-            self.dropdown_menu['menu'].configure(activebackground=_activebgcolordark)
+            self.dropdown_menu_color.configure(background=_bgcolorlight)
+            self.dropdown_menu_color.configure(fg=_fgcolorlight)
+            self.dropdown_menu_color['menu'].configure(fg=_fgcolorlight)
+            self.dropdown_menu_color['menu'].configure(background=_bgcolorlight)
+            self.dropdown_menu_color['menu'].configure(activebackground=_activebgcolordark)
             self.theme = 'light'
             root.configure(background=_lightwindowbackground)
         else:
@@ -294,7 +318,7 @@ class New_Toplevel_1:
             self.x_upper.configure(background=_bgcolordark)
             self.x_upper.configure(fg=_fgcolordark)
             self.bt_plot.configure(activebackground=_activebgcolordark)
-            self.dropdown_menu.configure(activebackground=_activebgcolordark)
+            self.dropdown_menu_color.configure(activebackground=_activebgcolordark)
             self.color_input.configure(background=_bgcolordark)
             self.color_input.configure(fg=_fgcolordark)
             self.bt_go.configure(activebackground=_activebgcolordark)
@@ -313,10 +337,10 @@ class New_Toplevel_1:
             self.bt_plot.configure(fg=_fgcolordark)
             self.bt_themeswitch.configure(background=_bgcolordark)
             self.bt_themeswitch.configure(fg=_fgcolordark)
-            self.dropdown_menu.configure(background=_bgcolordark)
-            self.dropdown_menu.configure(fg=_fgcolordark)
-            self.dropdown_menu['menu'].configure(fg=_fgcolordark)
-            self.dropdown_menu['menu'].configure(background=_bgcolordark)
+            self.dropdown_menu_color.configure(background=_bgcolordark)
+            self.dropdown_menu_color.configure(fg=_fgcolordark)
+            self.dropdown_menu_color['menu'].configure(fg=_fgcolordark)
+            self.dropdown_menu_color['menu'].configure(background=_bgcolordark)
             self.theme = 'dark'
             root.configure(background=_darkwindowbackground)
 
